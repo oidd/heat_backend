@@ -20,35 +20,8 @@ use Illuminate\Support\Str;
 |
 */
 
-//Route::get('/ttt', function () {
-//   for ($i = 0; $i < 100; $i++)
-//   {
-//       DB::table('soldered')->insert([
-//           'Brand' => Str::random(10),
-//           'Model' => Str::random(10),
-//           'HC' => rand(3, 10) / 5,
-//           'VC' => rand(3, 10) / 5,
-//           'width' => rand(3, 10) / 5,
-//           'height' => rand(3, 10) / 5,
-//           'Connection' => Str::random(10),
-//           'Bar' => Str::random(10),
-//           'Notes' => Str::random(10),
-//       ]);
-//
-//       DB::table('collapsible')->insert([
-//           'Brand' => Str::random(10),
-//           'Model' => Str::random(10),
-//           'HC' => rand(3, 10) / 5,
-//           'VC' => rand(3, 10) / 5,
-//           'width' => rand(3, 10) / 5,
-//           'height' => rand(3, 10) / 5,
-//           'DU' => rand(3, 10) / 5,
-//           'Notes' => Str::random(10),
-//       ]);
-//   }
-//});
-
 Route::post('/login', [AuthController::class, 'login']);
+
 
 Route::name('collapsible.')->controller(CollapsibleController::class)->prefix('/collapsible')->group(function () {
     Route::get('/', 'index');

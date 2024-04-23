@@ -15,12 +15,12 @@ return new class extends Migration
             $table->id();
             $table->string('Brand');
             $table->string('Model');
-            $table->float('HC');
-            $table->float('VC');
-            $table->float('width');
-            $table->float('height');
-            $table->string('Connection');
-            $table->string('Bar');
+            $table->float('HC')->nullable();
+            $table->float('VC')->nullable();
+            $table->float('width')->nullable();
+            $table->float('height')->nullable();
+            $table->string('Connection')->nullable();
+            $table->string('Bar')->nullable();
             $table->text('Notes')->nullable();
             $table->timestamps();
         });

@@ -13,9 +13,9 @@ class AuthController extends Controller
     {
         $credentials = $request->validated();
 
-        if (DB::table('user')
+        if (DB::table('admin')
             ->where('login', '=', $credentials['login'])
-            ->get('password') == md5($credentials['password']))
+            ->get('password')->first()->password)
         {
             return response()->json(['token' => $this->generate_token($credentials['login'])]);
         }

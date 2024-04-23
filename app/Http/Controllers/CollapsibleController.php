@@ -28,9 +28,9 @@ class CollapsibleController extends Controller
         return response()->json($pipe);
     }
 
-    public function store(CollapsibleRequest $request)
+    public function store(Request $request)
     {
-        $pipe = Collapsible::create($request->validated());
+        $pipe = Collapsible::create($request->input());
         return response()->json($pipe);
     }
 

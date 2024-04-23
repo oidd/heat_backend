@@ -20,18 +20,18 @@ class SolderedController extends Controller
         return response()->json(Soldered::findOrFail($id));
     }
 
-    public function update(int $id, SolderedRequest $request)
+    public function update(int $id, Request $request)
     {
         $pipe = Soldered::findOrFail($id);
-        $pipe->fill($request->all());
+        $pipe->fill($request->input());
         $pipe->save();
 
         return response()->json($pipe);
     }
 
-    public function store(SolderedRequest $request)
+    public function store(Request $request)
     {
-        $pipe = Soldered::create($request->validated());
+        $pipe = Soldered::create($request->input());
         return response()->json($pipe);
     }
 
