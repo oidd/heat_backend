@@ -12,16 +12,18 @@ class Soldered extends Model
 
     protected $table = 'soldered';
 
+    protected $hidden = ['created_at', 'updated_at'];
+
     protected $fillable = [
-        'brand',
-        'model',
-        'A',
-        'B',
-        'C',
-        'D',
-        'connection',
-        'bar',
-        'notes',
+        'Brand',
+        'Model',
+        'HC',
+        'VC',
+        'width',
+        'height',
+        'Connection',
+        'Bar',
+        'Notes',
     ];
 
     public function getAssociatedFiles()

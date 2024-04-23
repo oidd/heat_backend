@@ -11,14 +11,16 @@ class Collapsible extends Model
 
     protected $table = 'collapsible';
 
+    protected $hidden = ['created_at', 'updated_at'];
+
     protected $fillable = [
-        'brand',
-        'model',
+        'Brand',
+        'Model',
         'HC',
         'VC',
         'DU',
-        'W',
-        'H',
-        'notes',
+        'width',
+        'height',
+        'Notes',
     ];
 }

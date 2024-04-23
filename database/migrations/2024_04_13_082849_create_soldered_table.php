@@ -13,15 +13,15 @@ return new class extends Migration
     {
         Schema::create('soldered', function (Blueprint $table) {
             $table->id();
-            $table->string('brand');
-            $table->string('model');
-            $table->string('A');
-            $table->string('B');
-            $table->string('C');
-            $table->string('D');
-            $table->string('connection');
-            $table->string('bar');
-            $table->string('notes');
+            $table->string('Brand');
+            $table->string('Model');
+            $table->float('HC');
+            $table->float('VC');
+            $table->float('width');
+            $table->float('height');
+            $table->string('Connection');
+            $table->string('Bar');
+            $table->text('Notes')->nullable();
             $table->timestamps();
         });
     }

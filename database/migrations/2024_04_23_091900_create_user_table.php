@@ -11,16 +11,10 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('collapsible', function (Blueprint $table) {
+        Schema::create('user', function (Blueprint $table) {
             $table->id();
-            $table->string('Brand');
-            $table->string('Model');
-            $table->float('HC');
-            $table->float('VC');
-            $table->float('width');
-            $table->float('height');
-            $table->float('DU');
-            $table->text('Notes')->nullable();
+            $table->string('login');
+            $table->string('password');
             $table->timestamps();
         });
     }
@@ -30,6 +24,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('collapsible');
+        Schema::dropIfExists('user');
     }
 };
