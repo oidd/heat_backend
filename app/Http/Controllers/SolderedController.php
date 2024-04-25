@@ -20,7 +20,7 @@ class SolderedController extends Controller
 
         $stringColumns = ['Brand', 'Model', 'Connection', 'Bar'];
 
-        $sortedRecords = DB::table('soldered')->orderBy('Brand');
+        $sortedRecords = DB::table('soldered');
 
         foreach ($reqs as $k => $v)
         {
@@ -55,6 +55,10 @@ class SolderedController extends Controller
 
             return $item;
         });
+
+        if (empty($whereClauses) && empty($orderByClauses)) {
+            return response()->json($recordsWithFiles->sortBy('Brand')->values());
+        }
 
         return response()->json($recordsWithFiles);
     }

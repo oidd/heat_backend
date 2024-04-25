@@ -19,7 +19,7 @@ class CollapsibleController extends Controller
 
         $stringColumns = ['Brand', 'Model', 'DU'];
 
-        $sortedRecords = DB::table('collapsible')->orderBy('Brand');
+        $sortedRecords = DB::table('collapsible');
 
         foreach ($reqs as $k => $v)
         {
@@ -54,6 +54,10 @@ class CollapsibleController extends Controller
 
             return $item;
         });
+
+        if (empty($whereClauses) && empty($orderByClauses)) {
+            return response()->json($recordsWithFiles->sortBy('Brand')->values());
+        }
 
         return response()->json($recordsWithFiles);
     }
