@@ -18,10 +18,10 @@ class isAdmin
      */
     public function handle(Request $request, Closure $next): Response
     {
-        if ($request->input('jwt') == null)
+        if ($request->header('jwt') == null)
             return response()->json(['message' => 'No token provided'], 401);
 
-        if ($this->validate_jwt_token($request->input('jwt')))
+        if ($this->validate_jwt_token($request->header('jwt')))
             return $next($request);
 
         return response()->json(['message' => 'token expired'], 401);

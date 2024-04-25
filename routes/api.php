@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\CollapsibleController;
+use App\Http\Controllers\FileController;
 use App\Http\Controllers\SolderedController;
 use App\Models\Soldered;
 use Illuminate\Http\Request;
@@ -22,10 +23,11 @@ use Illuminate\Support\Str;
 
 Route::post('/login', [AuthController::class, 'login']);
 
+Route::middleware('isAdmin')->post('/upload', [FileController::class, 'upload']);
 
 Route::name('collapsible.')->controller(CollapsibleController::class)->prefix('/collapsible')->group(function () {
-    Route::get('/', 'index');
     Route::get('/{id}', 'show');
+    Route::get('/', 'index');
 
     Route::middleware('isAdmin')->group(function () {
         Route::post('/', 'store');
@@ -34,10 +36,9 @@ Route::name('collapsible.')->controller(CollapsibleController::class)->prefix('/
     });
 });
 
-
 Route::name('soldered.')->controller(SolderedController::class)->prefix('/soldered')->group(function () {
-    Route::get('/', 'index');
     Route::get('/{id}', 'show');
+    Route::get('/', 'index');
 
     Route::middleware('isAdmin')->group(function () {
         Route::post('/', 'store');

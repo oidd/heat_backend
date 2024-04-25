@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\CollapsibleRequest;
 use App\Http\Requests\tt01;
 use App\Models\Collapsible;
+use App\Models\Soldered;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
@@ -48,12 +49,22 @@ class CollapsibleController extends Controller
                 ->orderByRaw(implode(',', $orderByClauses));
         }
 
-        return response()->json($sortedRecords->get());
+        $recordsWithFiles = $sortedRecords->get()->map(function ($item) {
+            $item->files = DB::table('collapsible_files')->where('collapsible_id', $item->id)->get();
+
+            return $item;
+        });
+
+        return response()->json($recordsWithFiles);
     }
 
     public function show(int $id)
     {
-        return Collapsible::findOrFail($id);
+        $pipe = Collapsible::findOrFail($id);
+
+        $pipe->files = DB::table('collapsible_files')->where('collapsible_id', $id)->get();
+
+        return response()->json($pipe);
     }
 
     public function update(int $id, CollapsibleRequest $request)

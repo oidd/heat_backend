@@ -14,7 +14,9 @@ return new class extends Migration
         Schema::create('soldered_files', function (Blueprint $table) {
             $table->id();
             $table->foreignId('soldered_id');
+            $table->string('original_filename');
             $table->string('filename');
+            $table->string('url');
             $table->timestamps();
         });
     }

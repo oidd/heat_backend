@@ -50,15 +50,22 @@ class SolderedController extends Controller
                 ->orderByRaw(implode(',', $orderByClauses));
         }
 
-        //decide sign that _difference should have
+        $recordsWithFiles = $sortedRecords->get()->map(function ($item) {
+            $item->files = DB::table('soldered_files')->where('soldered_id', $item->id)->get();
 
+            return $item;
+        });
 
-        return response()->json($sortedRecords->get());
+        return response()->json($recordsWithFiles);
     }
 
     public function show(int $id)
     {
-        return response()->json(Soldered::findOrFail($id));
+        $pipe = Soldered::findOrFail($id);
+
+        $pipe->files = DB::table('soldered_files')->where('soldered_id', $id)->get();
+
+        return response()->json($pipe);
     }
 
     public function update(int $id, Request $request)
