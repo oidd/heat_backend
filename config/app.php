@@ -1,5 +1,6 @@
 <?php
 
+use App\Services\UploadFileService;
 use Illuminate\Support\Facades\Facade;
 use Illuminate\Support\ServiceProvider;
 

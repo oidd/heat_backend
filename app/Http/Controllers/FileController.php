@@ -34,4 +34,21 @@ class FileController extends Controller
 
         return response()->json(['path' => $path]);
     }
+
+    public function delete(Request $request)
+    {
+        $request->validate([
+            'table' => ['required', 'in:soldered,collapsible'],
+            'id' => ['required', 'integer']
+        ]);
+
+        $file = DB::table($request->input('table') . '_files')->where('id', $request->input('id'))->first();
+
+        $query = DB::table($request->input('table') . '_files')->delete($request->input('id'));
+
+        if ($query)
+            return response()->json(['file' => $file], 200);
+
+        return response()->json(['message' => 'No file with such id'], 400);
+    }
 }

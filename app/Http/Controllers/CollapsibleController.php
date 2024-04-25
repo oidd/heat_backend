@@ -6,6 +6,7 @@ use App\Http\Requests\CollapsibleRequest;
 use App\Http\Requests\tt01;
 use App\Models\Collapsible;
 use App\Models\Soldered;
+use App\Services\UploadFileService;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
@@ -71,10 +72,10 @@ class CollapsibleController extends Controller
         return response()->json($pipe);
     }
 
-    public function update(int $id, CollapsibleRequest $request)
+    public function update(int $id, Request $request)
     {
         $pipe = Collapsible::findOrFail($id);
-        $pipe->fill($request->all());
+        $pipe->fill($request->input());
         $pipe->save();
 
         return response()->json($pipe);
@@ -83,6 +84,7 @@ class CollapsibleController extends Controller
     public function store(Request $request)
     {
         $pipe = Collapsible::create($request->input());
+
         return response()->json($pipe);
     }
 

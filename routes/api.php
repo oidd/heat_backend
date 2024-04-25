@@ -23,7 +23,10 @@ use Illuminate\Support\Str;
 
 Route::post('/login', [AuthController::class, 'login']);
 
-Route::middleware('isAdmin')->post('/upload', [FileController::class, 'upload']);
+Route::middleware('isAdmin')->group(function () {
+    Route::post('/upload', [FileController::class, 'upload']);
+    Route::post('/deleteFile', [FileController::class, 'delete']);
+});
 
 Route::name('collapsible.')->controller(CollapsibleController::class)->prefix('/collapsible')->group(function () {
     Route::get('/{id}', 'show');

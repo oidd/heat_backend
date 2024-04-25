@@ -19,7 +19,7 @@ return new class extends Migration
             $table->float('VC')->nullable();
             $table->float('width')->nullable();
             $table->float('height')->nullable();
-            $table->float('DU')->nullable();
+            $table->string('DU')->nullable();
             $table->text('Notes')->nullable();
             $table->timestamps();
         });

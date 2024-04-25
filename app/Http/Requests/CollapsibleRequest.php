@@ -14,13 +14,14 @@ class CollapsibleRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'Brand' => 'required',
-            'Model' => 'required',
-            'HC' => 'required',
-            'VC' => 'required',
-            'width' => 'required',
-            'height' => 'required',
-            'DU' => 'required',
+            'Brand' => 'string',
+            'Model' => 'string',
+            'HC' => 'numeric',
+            'VC' => 'numeric',
+            'width' => 'numeric',
+            'height' => 'numeric',
+            'DU' => 'string',
+            'file' => 'file'
         ];
     }
 }
