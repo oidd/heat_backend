@@ -12,7 +12,7 @@ class FileController extends Controller
     {
         $request->validate([
             'file' => ['required','file'],
-            'table' => ['required', 'in:soldered,collapsible'],
+            'table' => ['required', 'in:soldered,collapsible,orseries,dtseries'],
             'pipe_id' => ['required', 'integer']
         ]);
 
@@ -38,7 +38,7 @@ class FileController extends Controller
     public function delete(Request $request)
     {
         $request->validate([
-            'table' => ['required', 'in:soldered,collapsible'],
+            'table' => ['required', 'in:soldered,collapsible,orseries,dtseries'],
             'id' => ['required', 'integer']
         ]);
 

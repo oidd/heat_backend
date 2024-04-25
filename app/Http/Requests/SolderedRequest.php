@@ -22,6 +22,7 @@ class SolderedRequest extends FormRequest
             'height' => 'numeric|nullable',
             'Connection' => 'string|nullable',
             'Bar' => 'string|nullable',
+            'Notes' => 'string|nullable',
         ];
     }
 }

@@ -21,6 +21,7 @@ class CollapsibleRequest extends FormRequest
             'width' => 'numeric|nullable',
             'height' => 'numeric|nullable',
             'DU' => 'string|nullable',
+            'Notes' => 'string|nullable',
         ];
     }
 }

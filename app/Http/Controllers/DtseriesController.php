@@ -2,25 +2,23 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\CollapsibleRequest;
-use App\Http\Requests\tt01;
-use App\Models\Collapsible;
-use App\Models\Soldered;
-use App\Services\UploadFileService;
+
+use App\Http\Requests\DtseriesRequest;
+use App\Models\Dtseries;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
-class CollapsibleController extends Controller
+class DtseriesController extends Controller
 {
     public function index(Request $request)
     {
         $reqs = $request->all();
 
-        $validColumns = ['Brand', 'Model', 'HC', 'VC', 'width', 'height', 'DU', 'Notes'];
+        $validColumns = ['model', 'a', 'c', 'd', 'e', 'g', 'h', 'j', 'k', 'l', 'm', 'n', 'p', 'q', 'r', 's', 't', 'max_flow', 'brass_area', 'Notes'];
 
-        $stringColumns = ['Brand', 'Model', 'DU', 'Notes'];
+        $stringColumns = ['model', 'n', 's', 't', 'Notes'];
 
-        $sortedRecords = DB::table('collapsible');
+        $sortedRecords = DB::table('dtseries');
 
         foreach ($reqs as $k => $v)
         {
@@ -51,13 +49,13 @@ class CollapsibleController extends Controller
         }
 
         $recordsWithFiles = $sortedRecords->get()->map(function ($item) {
-            $item->files = DB::table('collapsible_files')->where('collapsible_id', $item->id)->get();
+            $item->files = DB::table('dtseries_files')->where('dtseries_id', $item->id)->get();
 
             return $item;
         });
 
         if (empty($whereClauses) && empty($orderByClauses)) {
-            return response()->json($recordsWithFiles->sortBy('Brand')->values());
+            return response()->json($recordsWithFiles->sortBy('model')->values());
         }
 
         return response()->json($recordsWithFiles);
@@ -65,35 +63,34 @@ class CollapsibleController extends Controller
 
     public function show(int $id)
     {
-        $pipe = Collapsible::findOrFail($id);
+        $pipe = Dtseries::findOrFail($id);
 
-        $pipe->files = DB::table('collapsible_files')->where('collapsible_id', $id)->get();
+        $pipe->files = DB::table('dtseries_files')->where('dtseries_id', $id)->get();
 
         return response()->json($pipe);
     }
 
-    public function update(int $id, CollapsibleRequest $request)
+    public function update(int $id, DtseriesRequest $request)
     {
-        $pipe = Collapsible::findOrFail($id);
+        $pipe = Dtseries::findOrFail($id);
         $pipe->fill($request->validated());
         $pipe->save();
 
         return response()->json($pipe);
     }
 
-    public function store(CollapsibleRequest $request)
+    public function store(DtseriesRequest $request)
     {
-        $pipe = Collapsible::create($request->validated());
+        $pipe = Dtseries::create($request->validated());
 
         return response()->json($pipe);
     }
 
     public function destroy(int $id)
     {
-        $pipe = Collapsible::findOrFail($id);
+        $pipe = Dtseries::findOrFail($id);
         if ($pipe->delete())
             return response()->json('', 200);
         return response()->json('', 500);
     }
-
 }

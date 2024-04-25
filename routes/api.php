@@ -2,7 +2,9 @@
 
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\CollapsibleController;
+use App\Http\Controllers\DtseriesController;
 use App\Http\Controllers\FileController;
+use App\Http\Controllers\OrseriesController;
 use App\Http\Controllers\SolderedController;
 use App\Models\Soldered;
 use Illuminate\Http\Request;
@@ -40,6 +42,28 @@ Route::name('collapsible.')->controller(CollapsibleController::class)->prefix('/
 });
 
 Route::name('soldered.')->controller(SolderedController::class)->prefix('/soldered')->group(function () {
+    Route::get('/{id}', 'show');
+    Route::get('/', 'index');
+
+    Route::middleware('isAdmin')->group(function () {
+        Route::post('/', 'store');
+        Route::put('/{id}', 'update');
+        Route::delete('/{id}', 'destroy');
+    });
+});
+
+Route::name('dtseries.')->controller(DtseriesController::class)->prefix('/dtseries')->group(function () {
+    Route::get('/{id}', 'show');
+    Route::get('/', 'index');
+
+    Route::middleware('isAdmin')->group(function () {
+        Route::post('/', 'store');
+        Route::put('/{id}', 'update');
+        Route::delete('/{id}', 'destroy');
+    });
+});
+
+Route::name('orseries.')->controller(OrseriesController::class)->prefix('/orseries')->group(function () {
     Route::get('/{id}', 'show');
     Route::get('/', 'index');
 

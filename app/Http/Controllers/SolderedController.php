@@ -16,9 +16,9 @@ class SolderedController extends Controller
     {
         $reqs = $request->all();
 
-        $validColumns = ['Brand', 'Model', 'HC', 'VC', 'width', 'height', 'Connection', 'Bar'];
+        $validColumns = ['Brand', 'Model', 'HC', 'VC', 'width', 'height', 'Connection', 'Bar', 'Notes'];
 
-        $stringColumns = ['Brand', 'Model', 'Connection', 'Bar'];
+        $stringColumns = ['Brand', 'Model', 'Connection', 'Bar', 'Notes'];
 
         $sortedRecords = DB::table('soldered');
 
@@ -35,7 +35,7 @@ class SolderedController extends Controller
             }
             else
             {
-                $whereClauses[] = [$k, 'LIKE', '%' . $v . '%'];
+                $whereClauses[] = [$k, 'ILIKE', '%' . $v . '%'];
             }
         }
 
