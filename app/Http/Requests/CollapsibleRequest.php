@@ -16,12 +16,11 @@ class CollapsibleRequest extends FormRequest
         return [
             'Brand' => 'string',
             'Model' => 'string',
-            'HC' => 'numeric',
-            'VC' => 'numeric',
-            'width' => 'numeric',
-            'height' => 'numeric',
-            'DU' => 'string',
-            'file' => 'file'
+            'HC' => 'numeric|nullable',
+            'VC' => 'numeric|nullable',
+            'width' => 'numeric|nullable',
+            'height' => 'numeric|nullable',
+            'DU' => 'string|nullable',
         ];
     }
 }

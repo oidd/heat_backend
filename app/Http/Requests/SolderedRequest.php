@@ -14,14 +14,14 @@ class SolderedRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'Brand' => 'required',
-            'Model' => 'required',
-            'HC' => 'required',
-            'VC' => 'required',
-            'width' => 'required',
-            'height' => 'required',
-            'Connection' => 'required',
-            'Bar' => 'required',
+            'Brand' => 'string',
+            'Model' => 'string',
+            'HC' => 'numeric|nullable',
+            'VC' => 'numeric|nullable',
+            'width' => 'numeric|nullable',
+            'height' => 'numeric|nullable',
+            'Connection' => 'string|nullable',
+            'Bar' => 'string|nullable',
         ];
     }
 }

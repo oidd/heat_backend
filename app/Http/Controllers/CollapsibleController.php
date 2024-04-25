@@ -72,18 +72,18 @@ class CollapsibleController extends Controller
         return response()->json($pipe);
     }
 
-    public function update(int $id, Request $request)
+    public function update(int $id, CollapsibleRequest $request)
     {
         $pipe = Collapsible::findOrFail($id);
-        $pipe->fill($request->input());
+        $pipe->fill($request->validated());
         $pipe->save();
 
         return response()->json($pipe);
     }
 
-    public function store(Request $request)
+    public function store(CollapsibleRequest $request)
     {
-        $pipe = Collapsible::create($request->input());
+        $pipe = Collapsible::create($request->validated());
 
         return response()->json($pipe);
     }
