@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\DB;
 
-class Soldered extends Model
+class Soldered extends Table
 {
     use HasFactory;
 
@@ -26,8 +26,23 @@ class Soldered extends Model
         'Notes',
     ];
 
-    public function getAssociatedFiles()
+    public function getParams(): array
     {
-        return DB::table('soldered_files')->where('soldered_id', '=', $this->id)->get();
+        return [
+            'Brand' => ['string'],
+            'Model' => ['string'],
+            'HC' => ['numeric'],
+            'VC' => ['numeric'],
+            'width' => ['numeric'],
+            'height' => ['numeric'],
+            'Connection' => ['string'],
+            'Bar' => ['string'],
+            'Notes' => ['string'],
+        ];
+    }
+
+    public function getNecessaryParams(): array
+    {
+        return ['Brand', 'Model'];
     }
 }

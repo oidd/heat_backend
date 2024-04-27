@@ -8,7 +8,7 @@ use App\Models\Table;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
-abstract class AbstractTableController
+abstract class AbstractTableController extends Controller
 {
     public function __construct(protected Table $model)
     {}
