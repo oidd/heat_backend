@@ -13,9 +13,14 @@ class AuthController extends Controller
     {
         $credentials = $request->validated();
 
-        if (DB::table('admin')
+        if (($account = DB::table('admin')
             ->where('login', '=', $credentials['login'])
-            ->get('password')->first()->password)
+            ->get('password')->first()) == null)
+        {
+            return response()->json(['message' => 'Account with this login doesn\`t exist'], 400);
+        }
+
+        if ($account->password == md5($credentials['password']))
         {
             return response()->json(['token' => $this->generate_token($credentials['login'])]);
         }

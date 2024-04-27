@@ -5,22 +5,30 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Collapsible extends Model
+class Collapsible extends Table
 {
     use HasFactory;
 
     protected $table = 'collapsible';
 
-    protected $hidden = ['created_at', 'updated_at'];
+    public function getParams(): array
+    {
+        return [
+            'Brand' => ['string'],
+            'Model' => ['string'],
+            'HC' => ['numeric'],
+            'VC' => ['numeric'],
+            'width' => ['numeric'],
+            'height' => ['numeric'],
+            'DU' => ['string'],
+            'Notes' => ['string'],
+        ];
+    }
 
-    protected $fillable = [
-        'Brand',
-        'Model',
-        'HC',
-        'VC',
-        'DU',
-        'width',
-        'height',
-        'Notes',
-    ];
+    public function getNecessaryParams(): array
+    {
+        return [
+            'Brand', 'Model',
+        ];
+    }
 }

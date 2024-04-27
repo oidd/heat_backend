@@ -6,28 +6,29 @@ use App\Http\Requests\CollapsibleRequest;
 use App\Http\Requests\tt01;
 use App\Models\Collapsible;
 use App\Models\Soldered;
+use App\Models\Table;
 use App\Services\UploadFileService;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
 class CollapsibleController extends Controller
 {
-    public function index(Request $request)
+
+    public function index(Request $request, Collapsible $model)
     {
-        $reqs = $request->all();
+        $params = $model->getParams();
 
-        $validColumns = ['Brand', 'Model', 'HC', 'VC', 'width', 'height', 'DU', 'Notes'];
+        var_dump($params);
 
-        $stringColumns = ['Brand', 'Model', 'DU', 'Notes'];
+        $reqs = $request->validate(
+            $params
+        );
 
         $sortedRecords = DB::table('collapsible');
 
         foreach ($reqs as $k => $v)
         {
-            if (!in_array($k, $validColumns))
-                return response()->json(['message' => 'wrong column to sort by'], 400);
-
-            if (!in_array($k, $stringColumns))
+            if (!in_array('string', $params[$k]))
             {
                 $v = floatval($v);
                 $selectByClauses[] = DB::raw('"' . $k . '" - ' . $v . ' AS ' . $k . '_difference');
