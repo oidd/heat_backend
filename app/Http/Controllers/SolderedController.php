@@ -2,14 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\CollapsibleRequest;
-use App\Http\Requests\SolderedRequest;
-use App\Models\Collapsible;
 use App\Models\Soldered;
-use App\Models\Table;
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\Schema;
+use App\Services\UnifiedTablesService\AbstractTableController;
 
 class SolderedController extends AbstractTableController
 {

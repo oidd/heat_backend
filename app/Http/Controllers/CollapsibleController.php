@@ -2,13 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\CollapsibleRequest;
 use App\Models\Collapsible;
-use App\Models\Soldered;
-use App\Models\Table;
-use App\Services\UploadFileService;
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\DB;
+use App\Services\UnifiedTablesService\AbstractTableController;
 
 class CollapsibleController extends AbstractTableController
 {

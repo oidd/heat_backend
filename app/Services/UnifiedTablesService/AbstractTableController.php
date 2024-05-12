@@ -1,9 +1,8 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Services\UnifiedTablesService;
 
-use App\Http\Requests\CollapsibleRequest;
-use App\Models\Collapsible;
+use App\Http\Controllers\Controller;
 use App\Models\Table;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;

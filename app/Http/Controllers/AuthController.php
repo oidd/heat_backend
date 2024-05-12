@@ -39,6 +39,6 @@ class AuthController extends Controller
             'sub' => $username,
         );
 
-        return JWT::encode($payload, env('JWT_KEY'), 'HS256');
+        return JWT::encode($payload, app()['config']['jwt.secret'], 'HS256');
     }
 }
