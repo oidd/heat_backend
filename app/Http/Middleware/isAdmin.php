@@ -18,24 +18,14 @@ class isAdmin
      */
     public function handle(Request $request, Closure $next): Response
     {
-        if ($request->header('jwt') == null)
+        $inputKey = app()['config']['jwt.input_key'];
+
+        if ($request->header($inputKey) == null)
             return response()->json(['message' => 'No token provided'], 401);
 
-        if ($this->validate_jwt_token($request->header('jwt')))
+        if ($request->user() !== null)
             return $next($request);
 
         return response()->json(['message' => 'token expired'], 401);
-//        return $next($request);
-    }
-
-    private function validate_jwt_token($token)
-    {
-        try {
-            JWT::decode($token, new Key(env('JWT_KEY'), 'HS256'));
-        } catch (Exception $e) {
-            return false;
-        }
-
-        return true;
     }
 }
